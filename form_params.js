@@ -3,8 +3,10 @@
 var http = require("http"),
     fs = require("fs");
     parser = require("./params_parser.js");
+    render_view = require("./render_view.js");
 
 var p = parser.parse;
+var r = render_view = render_view;
 
 http.createServer(function(req, res){ 
 
@@ -18,19 +20,11 @@ http.createServer(function(req, res){
 
     var parametros = p(req);
 
-    for (var i = variables.length - 1; i >= 0; i--) {
-        //[nombre, apellido]
-        var variable = variables[i];
-        //parametros[variables[variable]]
-        //parametros[]
-        var value = eval(variables[i]);  
-        html_string = html_string.replace("{"+variables[i]+"}", parametros[variable]);
-
-    };
 
         res.writeHead(200,{"Content-Type":"text/html"})
 
         res.write(html_string);
+        res.write(render(html_string, parametros));
         res.end();
     });
 }).listen(8080);
