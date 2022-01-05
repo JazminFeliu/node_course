@@ -1,0 +1,14 @@
+{
+  "name": "hola_express",
+  "version": "0.0.1",
+  "description": "Hola Jupiter con Express",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jazmin con Código Facilito",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
