@@ -6,7 +6,7 @@ var http = require("http"),
 http.createServer(function(req, res){ 
     fs.readFile("./index.html", function(err, html){
            
-        res.writeHead(404,{"Content-Type":"text/html"})
+        res.writeHead(200,{"Content-Type":"application/json"})
 
         res.write(JSON.stringify({nombre: "Jazmin", username:"jazmin"}));
         res.end();
