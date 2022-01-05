@@ -3,12 +3,15 @@
 var http = require("http"),
     fs = require("fs");
 
-fs.readFile("./index.html", function(err, html){
-    http.createServer(function(req, res){        
-        res.write(html);
+http.createServer(function(req, res){ 
+    fs.readFile("./index.html", function(err, html){
+           
+        res.writeHead(404,{"Content-Type":"text/html"})
+
+        res.write(JSON.stringify({nombre: "Jazmin", username:"jazmin"}));
         res.end();
-    }).listen(8080);
-});    
+    });
+}).listen(8080);
 
 
 
