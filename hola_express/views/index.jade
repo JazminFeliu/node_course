@@ -1,0 +1,18 @@
+html 
+    head    
+        title Mi primera página con Express y Jade
+    body 
+        - var arreglo = [1,2,3,4,5,6];
+        each item in arreglo 
+            p=item
+
+        - for (var i = arreglo.length - 1; i >=0; i--)
+             //-interpolacion de etiquetas: 
+            p. 
+                Hola haz click en #[a(href="codigofacilito.com") este link] por favor
+
+                    //-  interpolacion de texto y codigo js -p  Hola #{arreglo[i]} 
+                    //- p= "<h1>"+arreglo[i]+"</h1>"
+                
+                   
+        
