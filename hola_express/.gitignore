@@ -1,0 +1,2 @@
+# Ignora la carpeta de los módulos instalados con NPM
+/node_modules
