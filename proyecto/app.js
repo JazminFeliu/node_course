@@ -4,13 +4,16 @@ var app = express();
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
-mongoose.connect("mongodb://localhost/fotos");
+mongoose.connect("mongodb://root:root@127.0.0.1:27017/thedbname?authSource=admin");
 
 var userSchemaJSON = {
     email: String,
     password: String
 
 };
+
+// montaje de mongodb con docker-compose: https://diegoorozco.com/dockermongodb
+// y uso de mongodb-client en misma ref.
 
 var user_schema = new Schema(userSchemaJSON);
 
