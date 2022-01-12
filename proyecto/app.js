@@ -2,7 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var app = express();
 var User = require("./models/user").User;
-var session = require("express-session");
+var cookieSession = require("cookie-session");
 var router_app = require("./routes_app");
 var session_middleware = require("./middlewares/session");
 
@@ -10,10 +10,9 @@ var session_middleware = require("./middlewares/session");
 app.use(express.static('public'));
 app.use(bodyParser.json());  //para peticiones application/json
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(session({
-    secret: "98754asdf789rerd",
-    resave: false,
-    saveUninitialized: false
+app.use(cookieSession({
+        name: "session",
+        keys: ["llave1","llave2"]
 }));
 
 app.set("view engine", "jade");
