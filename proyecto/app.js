@@ -13,32 +13,24 @@ app.get("/", function(req, res){
     res.render("index");
 });
 
-app.get("/login", function(req, res){
+app.get("/signup", function(req, res){
     User.find(function(err,doc){
         console.log(doc);
-        res.render("login");
+        res.render("signup");
     });    
 });
 
-app.post("/users", function(req, res){
+app.get("/login", function(req, res){
+        res.render("login");  
+});
 
-    var user = new User({
-                        email: req.body.email, 
-                        password: req.body.password,
-                        password_confirmation: req.body.password_confirmation,
-                        username: req.body.username
-                        });
+app.post("/sessions", function(req, res){
 
+    User.findOne({email:req.body.email,password:req.body.password},function(err,docs){
+        console.log(docs);
+        res.send("Hola Jupiter");
+    })
     
-    user.save().then(function(us){
-        res.send("Guardamos el usuario exitosamente");
-    }, function(err){
-        if(err){
-            console.log(String(err));
-            res.send("No pudimos guardar la información");
-        }
-    });
-
 });
 
 app.listen(8080);
