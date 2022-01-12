@@ -4,7 +4,6 @@ var app = express();
 var User = require("./models/user").User;
 
 
-
 app.use(express.static('public'));
 app.use(bodyParser.json());  //para peticiones application/json
 app.use(bodyParser.urlencoded({extended:true}));
@@ -23,22 +22,23 @@ app.get("/login", function(req, res){
 
 app.post("/users", function(req, res){
 
-    var user = new User({email: req.body.email, 
+    var user = new User({
+                        email: req.body.email, 
                         password: req.body.password,
                         password_confirmation: req.body.password_confirmation,
                         username: req.body.username
                         });
 
-    console.log(user.password_confirmation);
-
-    user.save(function(err){
+    
+    user.save().then(function(us){
+        res.send("Guardamos el usuario exitosamente");
+    }, function(err){
         if(err){
             console.log(String(err));
+            res.send("No pudimos guardar la información");
         }
-        res.send("Guardamos tus datos");
-    });  
-    
-});
+    });
 
+});
 
 app.listen(8080);
