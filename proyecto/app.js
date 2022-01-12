@@ -1,23 +1,9 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var app = express();
-var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
+var User = require("./models/user").User;
 
-mongoose.connect("mongodb://root:root@127.0.0.1:27017/thedbname?authSource=admin");
 
-var userSchemaJSON = {
-    email: String,
-    password: String
-
-};
-
-// montaje de mongodb con docker-compose: https://diegoorozco.com/dockermongodb
-// y uso de mongodb-client en misma ref.
-
-var user_schema = new Schema(userSchemaJSON);
-
-var User = mongoose.model("User", user_schema);
 
 app.use(express.static('public'));
 app.use(bodyParser.json());  //para peticiones application/json
@@ -36,7 +22,11 @@ app.get("/login", function(req, res){
 });
 
 app.post("/users", function(req, res){
-    var user = new User({email: req.body.email, password: req.body.password});
+    var user = new User({email: req.body.email, 
+                        password: req.body.password,
+                        password_confirmation: req.body.password_confirmation
+                        });
+    console.log(password_confirmation);
 
     user.save(function(){
         res.send("Guardamos tus datos");
