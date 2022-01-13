@@ -13,6 +13,7 @@
     "cookie-session": "^2.0.0",
     "express": "^4.17.2",
     "express-session": "^1.17.2",
+    "imagen": "^1.0.0",
     "jade": "^1.11.0",
     "mongoose": "^6.1.5"
   }

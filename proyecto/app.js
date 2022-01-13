@@ -7,9 +7,10 @@ var router_app = require("./routes_app");
 var session_middleware = require("./middlewares/session");
 
 
-app.use(express.static('public'));
+app.use("/public", express.static('public'));
 app.use(bodyParser.json());  //para peticiones application/json
 app.use(bodyParser.urlencoded({extended:true}));
+
 app.use(cookieSession({
         name: "session",
         keys: ["llave1","llave2"]
