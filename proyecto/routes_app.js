@@ -60,8 +60,10 @@ router.route("/imagenes")
         });
     })
     .post(function(req,res){
+        console.log(res.locals.user._id);
         var data = {
-            title: req.body.title
+            title: req.body.title,
+            creator: res.locals.user._id
         }
         var imagen = new Imagen(data);
         
@@ -70,6 +72,7 @@ router.route("/imagenes")
                 res.redirect("/app/imagenes/"+imagen._id)
             }
             else{
+                console.log(imagen);
                 res.render(err);
             }
         });
