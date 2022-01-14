@@ -29,6 +29,7 @@ router.route("/imagenes/:id")
 
 })
     .put(function(req,res){
+        //modifica las imagenes
             Imagen.findById(req.params.id, function(err, imagen){
                 imagen.title = req.body.title;
                 imagen.save(function(err){
@@ -43,7 +44,15 @@ router.route("/imagenes/:id")
 
 })
     .delete(function(req,res){
-
+        //eliminar las imagenes
+        Imagen.findOneAndRemove({_id: req.params.id}, function(err){
+            if(!err){
+                res.redirect("/app/imagenes");
+            }else{
+                console.log(err);
+                res.redirect("/app/imagenes"+req.params.id);
+            }
+        })
 });
 
 
