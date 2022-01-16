@@ -6,7 +6,7 @@ var cookieSession = require("cookie-session");
 var router_app = require("./routes_app");
 var session_middleware = require("./middlewares/session");
 var methodOverride = require("method-override");
-
+var formidable = require("express-form-data");
 
 app.use("/public", express.static('public'));
 app.use(bodyParser.json());  //para peticiones application/json
@@ -18,6 +18,8 @@ app.use(cookieSession({
         name: "session",
         keys: ["llave1","llave2"]
 }));
+
+app.use(formidable.parse({ keepExtensions: true}));
 
 app.set("view engine", "jade");
 
@@ -35,6 +37,21 @@ app.get("/signup", function(req, res){
 
 app.get("/login", function(req, res){
         res.render("login");  
+});
+
+app.post("/users", function(req, res){
+    var user = new User({
+            email:req.body.email,
+            password:req.body.password,
+            password_confirmation:req.body.password_confirmation,
+            username: req.body.username    
+    });
+    user.save().then(function(us){
+        res.send("Guardamos al usuario exitosamente")
+    }, function(err){
+        console.log(String(err));
+        res.send("Hubo un error al guardar el usuario");
+    });
 });
 
 app.post("/sessions", function(req, res){

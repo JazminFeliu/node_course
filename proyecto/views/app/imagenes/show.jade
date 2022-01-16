@@ -1,5 +1,8 @@
-extends ../../layout.jade
+extends ../../layout.jade 
+
 block contenido 
-    h1= imagen.title
-    if(typeof imagen.creator!== "undefined")
-    p Por #{imagen.creator.email}
+    div(class="img-container")
+        h1= imagen.title
+        img(src="/public/imagenes/#{imagen._id}.#{imagen.extension}",class="main-img")
+        if(typeof imagen.creator != "undefined")
+            p Por #{imagen.creator.email}
