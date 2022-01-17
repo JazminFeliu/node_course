@@ -2,21 +2,20 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var app = express();
 var User = require("./models/user").User;
-var cookieSession = require("cookie-session");
+var cokieSession = require("cookie-session");
 var router_app = require("./routes_app");
 var session_middleware = require("./middlewares/session");
 var methodOverride = require("method-override");
 var formidable = require("express-form-data");
-
 app.use("/public", express.static('public'));
 app.use(bodyParser.json());  //para peticiones application/json
 app.use(bodyParser.urlencoded({extended:true}));
 
 app.use(methodOverride("_method"))
 
-app.use(cookieSession({
-        name: "session",
-        keys: ["llave1","llave2"]
+app.use(cokieSession({
+    name: "session",
+    keys: ["llave-1","llave-2"]
 }));
 
 app.use(formidable.parse({ keepExtensions: true}));
